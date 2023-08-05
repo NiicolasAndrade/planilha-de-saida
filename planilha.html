@@ -47,6 +47,10 @@
   </style>
 </head>
 <body>
+  <h1>Planilha de Nomes</h1>
+  <input type="text" id="inputNome" placeholder="Digite o nome da pessoa">
+  <button onclick="adicionarNome()">Adicionar</button>
+
   <table>
     <thead>
       <tr>
@@ -55,19 +59,7 @@
         <th>Contador</th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <td>ALEF PAIVA DE ARAUJO</td>
-        <td><button onclick="saiu(this)">Saiu</button></td>
-        <td class="contador">3</td>
-      </tr>
-      <!-- Adicione as outras linhas com os nomes aqui -->
-      <!-- ... -->
-      <tr>
-        <td>YGOR GUEDES DE AZEVEDO</td>
-        <td><button onclick="saiu(this)">Saiu</button></td>
-        <td class="contador">3</td>
-      </tr>
+    <tbody id="tabelaCorpo">
     </tbody>
   </table>
 
@@ -86,6 +78,40 @@
           button.style.backgroundColor = "#ccc";
           button.parentNode.parentNode.classList.add("completed");
         }
+      }
+    }
+
+    function adicionarNome() {
+      var inputNome = document.getElementById("inputNome");
+      var nome = inputNome.value.trim();
+
+      if (nome !== "") {
+        var tabelaCorpo = document.getElementById("tabelaCorpo");
+        var novaLinha = document.createElement("tr");
+
+        var colunaNome = document.createElement("td");
+        colunaNome.textContent = nome;
+
+        var colunaSaiu = document.createElement("td");
+        var botaoSaiu = document.createElement("button");
+        botaoSaiu.textContent = "Saiu";
+        botaoSaiu.onclick = function() {
+          saiu(botaoSaiu);
+        };
+
+        colunaSaiu.appendChild(botaoSaiu);
+
+        var colunaContador = document.createElement("td");
+        colunaContador.textContent = "3";
+        colunaContador.classList.add("contador");
+
+        novaLinha.appendChild(colunaNome);
+        novaLinha.appendChild(colunaSaiu);
+        novaLinha.appendChild(colunaContador);
+
+        tabelaCorpo.appendChild(novaLinha);
+
+        inputNome.value = "";
       }
     }
   </script>
